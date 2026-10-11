@@ -157,3 +157,51 @@ footer {
     font-size: 13px;
     color: var(--text-muted);
 }
+
+/* ============================================
+   M2 — NAVIGATION
+   ============================================ */
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) 0;
+    margin-bottom: var(--space-lg);
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+}
+
+nav ul {
+    display: flex;
+    gap: var(--space-md);
+}
+
+nav ul a {
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: color 0.15s ease;
+}
+
+nav ul a:hover {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.btn-contact {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 16px;
+    background: var(--accent);
+    color: #ffffff;
+    border-radius: var(--radius);
+    transition: opacity 0.15s ease;
+}
+
+.btn-contact:hover {
+    opacity: 0.85;
+    text-decoration: none;
+}
