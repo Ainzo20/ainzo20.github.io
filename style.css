@@ -159,20 +159,43 @@ footer {
 }
 
 /* ============================================
-   M2 — NAVIGATION
+   M2 — HEADER WITH NAVIGATION
    ============================================ */
 
-nav {
+header {
     position: sticky;
     top: 0;
     z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--space-md);
     padding: var(--space-sm) 0;
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xl);
     background: var(--bg);
     border-bottom: 1px solid var(--line);
+}
+
+.brand h1 {
+    margin-bottom: 0;
+}
+
+.tagline {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+.location {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
 }
 
 nav ul {
@@ -195,13 +218,15 @@ nav ul a:hover {
     font-size: 14px;
     font-weight: 600;
     padding: 8px 16px;
-    background: var(--accent);
-    color: #ffffff;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
     border-radius: var(--radius);
-    transition: opacity 0.15s ease;
+    transition: background 0.15s ease, color 0.15s ease;
 }
 
 .btn-contact:hover {
-    opacity: 0.85;
+    background: var(--accent);
+    color: #ffffff;
     text-decoration: none;
 }
