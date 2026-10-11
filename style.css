@@ -1,6 +1,5 @@
 /* ============================================
    RESET
-   Remove browser defaults so we control everything
    ============================================ */
 
 *,
@@ -45,38 +44,32 @@ ol {
 
 /* ============================================
    VARIABLES
-   One place to change everything
    ============================================ */
 
 :root {
-    /* Colors */
     --bg: #ffffff;
     --text: #111111;
     --text-muted: #666666;
     --line: #e5e5e5;
     --accent: #1e5fbf;
 
-    /* Typography */
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                  Helvetica, Arial, sans-serif;
     --font-size-base: 16px;
     --line-height-base: 1.6;
 
-    /* Spacing (8px grid) */
     --space-xs: 8px;
     --space-sm: 16px;
     --space-md: 24px;
     --space-lg: 40px;
     --space-xl: 56px;
 
-    /* Layout */
     --content-width: 780px;
     --radius: 6px;
 }
 
 /* ============================================
    BASE TYPOGRAPHY
-   Applied to the whole page
    ============================================ */
 
 body {
@@ -89,10 +82,6 @@ body {
     max-width: var(--content-width);
     margin: 0 auto;
 }
-
-/* ============================================
-   HEADINGS
-   ============================================ */
 
 h1 {
     font-size: 32px;
@@ -121,10 +110,6 @@ h3 {
     margin-bottom: var(--space-sm);
 }
 
-/* ============================================
-   PARAGRAPHS AND LINKS
-   ============================================ */
-
 p {
     margin-bottom: var(--space-sm);
 }
@@ -139,14 +124,10 @@ a:hover {
 }
 
 /* ============================================
-   SECTIONS
+   SECTIONS AND FOOTER
    ============================================ */
 
 section {
-    margin-bottom: var(--space-xl);
-}
-
-header {
     margin-bottom: var(--space-xl);
 }
 
@@ -156,6 +137,10 @@ footer {
     border-top: 1px solid var(--line);
     font-size: 13px;
     color: var(--text-muted);
+}
+
+footer p {
+    margin-bottom: 0;
 }
 
 /* ============================================
