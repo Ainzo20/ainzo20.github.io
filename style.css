@@ -73,3 +73,87 @@ ol {
     --content-width: 780px;
     --radius: 6px;
 }
+
+/* ============================================
+   BASE TYPOGRAPHY
+   Applied to the whole page
+   ============================================ */
+
+body {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--text);
+    background: var(--bg);
+    padding: var(--space-md);
+    max-width: var(--content-width);
+    margin: 0 auto;
+}
+
+/* ============================================
+   HEADINGS
+   ============================================ */
+
+h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-xs);
+}
+
+h2 {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid var(--line);
+}
+
+h3 {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: var(--space-sm);
+}
+
+/* ============================================
+   PARAGRAPHS AND LINKS
+   ============================================ */
+
+p {
+    margin-bottom: var(--space-sm);
+}
+
+a {
+    color: var(--accent);
+    transition: color 0.15s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   SECTIONS
+   ============================================ */
+
+section {
+    margin-bottom: var(--space-xl);
+}
+
+header {
+    margin-bottom: var(--space-xl);
+}
+
+footer {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--text-muted);
+}
