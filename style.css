@@ -1,0 +1,75 @@
+/* ============================================
+   RESET
+   Remove browser defaults so we control everything
+   ============================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    min-height: 100vh;
+}
+
+img,
+picture,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+/* ============================================
+   VARIABLES
+   One place to change everything
+   ============================================ */
+
+:root {
+    /* Colors */
+    --bg: #ffffff;
+    --text: #111111;
+    --text-muted: #666666;
+    --line: #e5e5e5;
+    --accent: #1e5fbf;
+
+    /* Typography */
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 Helvetica, Arial, sans-serif;
+    --font-size-base: 16px;
+    --line-height-base: 1.6;
+
+    /* Spacing (8px grid) */
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 40px;
+    --space-xl: 56px;
+
+    /* Layout */
+    --content-width: 780px;
+    --radius: 6px;
+}
