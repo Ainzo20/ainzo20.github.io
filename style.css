@@ -86,6 +86,10 @@ body {
   transition: background 0.25s ease, color 0.25s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Inter is a variable font with an optical sizing axis. This makes
+     small text render with slightly wider letterforms and larger text
+     with tighter ones, the way a type designer intended. */
+  font-optical-sizing: auto;
 }
 
 .wrap {
@@ -140,9 +144,9 @@ a:hover { color: var(--accent-hover); }
 
 .eyebrow {
   display: inline-block;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-muted);
   margin-bottom: var(--space-sm);
@@ -299,10 +303,10 @@ a:hover { color: var(--accent-hover); }
 }
 
 .hero h1 {
-  font-size: clamp(32px, 5.5vw, 60px);
+  font-size: clamp(32px, 5.5vw, 72px);
   font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  line-height: 1.03;
+  letter-spacing: -0.035em;
   max-width: 18ch;
   margin-bottom: var(--space-md);
 }
@@ -503,8 +507,10 @@ a:hover { color: var(--accent-hover); }
 }
 .section-sub {
   font-size: 15px;
+  line-height: 1.55;
   color: var(--text-muted);
   margin-top: var(--space-xs);
+  max-width: 62ch;
 }
 
 /* ==========================================================================
@@ -545,9 +551,9 @@ a:hover { color: var(--accent-hover); }
 }
 
 .project-tag {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-muted);
   margin-bottom: var(--space-xs);
@@ -560,9 +566,10 @@ a:hover { color: var(--accent-hover); }
   transition: color 0.25s ease;
 }
 .project-body p {
-  font-size: 15px;
+  font-size: 15.5px;
+  line-height: 1.65;
   margin-bottom: var(--space-md);
-  max-width: 46ch;
+  max-width: 62ch;
 }
 .project-body .tags { margin-bottom: var(--space-md); }
 
@@ -756,9 +763,9 @@ a:hover { color: var(--accent-hover); }
    while staying readable. */
 .skill-group h3 {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-soft);
   margin-bottom: var(--space-xs);
@@ -776,8 +783,10 @@ a:hover { color: var(--accent-hover); }
 
 .contact-sub {
   font-size: 16px;
+  line-height: 1.55;
   color: var(--text-muted);
   margin-bottom: var(--space-lg);
+  max-width: 52ch;
 }
 
 .contact-actions {
