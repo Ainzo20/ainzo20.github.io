@@ -20,12 +20,12 @@ ul, ol { list-style: none; }
 
   --text:         #0b1120;
   --text-soft:    #334155;
-  --text-muted:   #566277;   /* was #64748b: below 4.5:1 on --bg-soft */
+  --text-muted:   #566277;
 
   --line:         #e6e2d8;
   --line-strong:  #cbc6b6;
 
-  --accent:       #0369a1;   /* was #0ea5e9: white on it was only 2.8:1 */
+  --accent:       #0369a1;
   --accent-hover: #075985;
   --accent-soft:  #e0f2fe;
   --on-accent:    #ffffff;
@@ -34,7 +34,7 @@ ul, ol { list-style: none; }
 
   --font-display: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-logo:    "Italiana", "Cormorant Garamond", serif;
+  --font-logo:    "Fraunces", "Iowan Old Style", Georgia, serif;
 
   --space-2xs: 4px;
   --space-xs:  8px;
@@ -86,9 +86,6 @@ body {
   transition: background 0.25s ease, color 0.25s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Inter is a variable font with an optical sizing axis. This makes
-     small text render with slightly wider letterforms and larger text
-     with tighter ones, the way a type designer intended. */
   font-optical-sizing: auto;
 }
 
@@ -129,7 +126,6 @@ a:hover { color: var(--accent-hover); }
 }
 .skip-link:focus { left: 0; top: 0; }
 
-/* Visible to screen readers only */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -175,6 +171,13 @@ a:hover { color: var(--accent-hover); }
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
+  transition: box-shadow 0.25s ease, background 0.25s ease;
+}
+.site-header.is-scrolled {
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  box-shadow:
+    0 1px 0 var(--line),
+    0 6px 20px -12px color-mix(in srgb, var(--text) 30%, transparent);
 }
 
 .header-inner {
@@ -186,14 +189,17 @@ a:hover { color: var(--accent-hover); }
   padding-bottom: var(--space-sm);
 }
 
+/* Fraunces at weight 800. Optical sizing is on so the letterforms adapt
+   to the header size and stay legible. Slightly tighter tracking than a
+   sans would need, because Fraunces has generous natural sidebearings. */
 .brand {
   font-family: var(--font-logo);
-  font-size: clamp(22px, 2.6vw, 28px);
-  font-style: italic;
-  font-weight: 400;
+  font-size: clamp(20px, 2.4vw, 24px);
+  font-weight: 800;
+  font-optical-sizing: auto;
   color: var(--accent);
-  letter-spacing: 0.01em;
-  line-height: 1;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
   transition: color 0.15s ease;
 }
 .brand:hover { color: var(--accent-hover); }
@@ -204,11 +210,28 @@ a:hover { color: var(--accent-hover); }
   gap: clamp(14px, 2.4vw, 28px);
 }
 .site-nav a {
+  position: relative;
   font-size: 14px;
   font-weight: 500;
   color: var(--text-muted);
 }
 .site-nav a:hover { color: var(--text); }
+@media (hover: hover) {
+  .site-nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    bottom: -4px;
+    height: 2px;
+    background: var(--accent);
+    transition: left 0.2s ease, right 0.2s ease;
+  }
+  .site-nav a:hover::after {
+    left: 0;
+    right: 0;
+  }
+}
 
 .tools {
   display: flex;
@@ -242,9 +265,10 @@ a:hover { color: var(--accent-hover); }
   background: var(--bg);
   color: var(--text-soft);
   cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
 }
 .icon-btn:hover { border-color: var(--line-strong); background: var(--bg-soft); }
+.icon-btn:active { transform: scale(0.94); }
 .icon-btn--text {
   width: auto;
   min-width: 36px;
@@ -300,6 +324,11 @@ a:hover { color: var(--accent-hover); }
   border-radius: 50%;
   background: var(--success);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--success) 18%, transparent);
+  animation: status-pulse 2.4s ease-in-out infinite;
+}
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
 }
 
 .hero h1 {
@@ -310,12 +339,40 @@ a:hover { color: var(--accent-hover); }
   max-width: 18ch;
   margin-bottom: var(--space-md);
 }
+
+/* The emphasized phrase stays in the headline font (no italic, no
+   font swap), same color as the rest of the headline. What sets it
+   apart is a faint white-blue glow: brighter than a shadow, softer
+   than a highlight. Two shadows at different blurs give it depth. */
 .hero h1 em {
-  font-family: var(--font-logo);
-  font-style: italic;
-  font-weight: 400;
-  color: var(--accent);
-  letter-spacing: 0;
+  font-style: normal;
+  font-weight: 700;
+  color: inherit;
+  letter-spacing: -0.035em;
+  text-shadow:
+    0 0 1px color-mix(in srgb, #dbeafe 70%, transparent),
+    0 0 14px color-mix(in srgb, #bfdbfe 55%, transparent),
+    0 0 32px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero h1 em {
+    animation: hero-glow 6s ease-in-out infinite;
+  }
+}
+@keyframes hero-glow {
+  0%, 100% {
+    text-shadow:
+      0 0 1px color-mix(in srgb, #dbeafe 70%, transparent),
+      0 0 14px color-mix(in srgb, #bfdbfe 55%, transparent),
+      0 0 32px color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+  50% {
+    text-shadow:
+      0 0 1px color-mix(in srgb, #eff6ff 85%, transparent),
+      0 0 18px color-mix(in srgb, #dbeafe 70%, transparent),
+      0 0 42px color-mix(in srgb, var(--accent) 32%, transparent);
+  }
 }
 
 .lead {
@@ -386,8 +443,6 @@ a:hover { color: var(--accent-hover); }
   animation: drift-3 22s ease-in-out infinite;
 }
 
-/* Icon inside each orb. Sized as a fraction of the orb so it stays
-   proportional as the circle drifts and as the viewport changes. */
 .orb svg {
   width: 30%;
   height: 30%;
@@ -397,8 +452,6 @@ a:hover { color: var(--accent-hover); }
   opacity: 0.85;
 }
 
-/* The cycling word below the icon. min-height reserves the line so the
-   orb does not jump when the word length changes. */
 .orb-word {
   display: block;
   min-height: 1em;
@@ -413,9 +466,6 @@ a:hover { color: var(--accent-hover); }
   opacity: 1;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
-
-/* While the word is swapping, fade out and lift slightly. The script
-   toggles this class, waits, changes the text, then removes the class. */
 .orb-word.is-changing {
   opacity: 0;
   transform: translateY(-4px);
@@ -428,7 +478,6 @@ a:hover { color: var(--accent-hover); }
   75%  { transform: translate(-20px, -10px) rotate(3deg) scale(1.02); }
   100% { transform: translate(0, 0) rotate(0deg) scale(1); }
 }
-
 @keyframes drift-2 {
   0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
   25%  { transform: translate(-22px, 12px) rotate(-5deg) scale(1.02); }
@@ -436,7 +485,6 @@ a:hover { color: var(--accent-hover); }
   75%  { transform: translate(10px, -28px) rotate(-3deg) scale(1.03); }
   100% { transform: translate(0, 0) rotate(0deg) scale(1); }
 }
-
 @keyframes drift-3 {
   0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
   25%  { transform: translate(-14px, 26px) rotate(8deg) scale(1.04); }
@@ -495,12 +543,6 @@ a:hover { color: var(--accent-hover); }
   margin-bottom: clamp(32px, 5vw, 56px);
   max-width: 640px;
 }
-
-/* Tighten the gap when a banner image follows directly after the head */
-.section-head:has(+ .work-banner) {
-  margin-bottom: var(--space-md);
-}
-
 .section-head h2 {
   font-size: clamp(26px, 3.6vw, 40px);
   font-weight: 700;
@@ -526,6 +568,16 @@ a:hover { color: var(--accent-hover); }
   padding: 4px 10px;
   border-radius: 999px;
 }
+@media (hover: hover) {
+  .tags li {
+    transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+  .tags li:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
 
 /* ==========================================================================
    9. PROJECTS
@@ -542,8 +594,6 @@ a:hover { color: var(--accent-hover); }
 .project--reverse .project-media { order: 2; }
 .project--reverse .project-body  { order: 1; }
 
-/* The media container. overflow: hidden keeps the image from spilling
-   out of the rounded corners when it scales on hover. */
 .project-media {
   display: block;
   overflow: hidden;
@@ -573,8 +623,6 @@ a:hover { color: var(--accent-hover); }
 }
 .project-body .tags { margin-bottom: var(--space-md); }
 
-/* The link arrow. The ::after element is an underline that draws in
-   from left to right on hover, which pairs with the arrow sliding right. */
 .link-arrow {
   position: relative;
   display: inline-flex;
@@ -589,7 +637,7 @@ a:hover { color: var(--accent-hover); }
   content: "";
   position: absolute;
   left: 0;
-  right: 22px;              /* stop short of the arrow icon */
+  right: 22px;
   bottom: 12px;
   height: 1px;
   background: currentColor;
@@ -600,11 +648,6 @@ a:hover { color: var(--accent-hover); }
 .link-arrow:hover { color: var(--accent-hover); }
 .link-arrow:hover::after { transform: scaleX(1); }
 
-/* --- Hover state for the whole project row ---------------------------
-   Everything below is wrapped in @media (hover: hover) so touch
-   devices do not get stuck with a hover state after a tap.
-   The three motions (image scale, border color, shadow) all fire
-   together so the card responds as one object. */
 @media (hover: hover) {
   .project-img {
     transition: transform 0.4s ease, border-color 0.3s ease;
@@ -615,6 +658,17 @@ a:hover { color: var(--accent-hover); }
   }
   .project:hover .project-body h3 {
     color: var(--accent);
+  }
+  .project-media {
+    transition: box-shadow 0.35s ease;
+  }
+  .project-media:hover {
+    box-shadow:
+      0 20px 40px -20px color-mix(in srgb, var(--text) 30%, transparent),
+      0 8px 16px -12px color-mix(in srgb, var(--text) 20%, transparent);
+  }
+  .project-media:hover .project-img {
+    will-change: transform;
   }
 }
 
@@ -629,24 +683,6 @@ a:hover { color: var(--accent-hover); }
   background: var(--bg-muted);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  /* will-change only on desktop hover devices: it promotes the image
-     to its own compositor layer for a smooth scale animation. */
-}
-
-/* Shadow appears under the whole media block on hover. Applied to the
-   wrapper, not the image, so it does not scale with the zoom. */
-@media (hover: hover) {
-  .project-media {
-    transition: box-shadow 0.35s ease;
-  }
-  .project-media:hover {
-    box-shadow:
-      0 20px 40px -20px color-mix(in srgb, var(--text) 30%, transparent),
-      0 8px 16px -12px color-mix(in srgb, var(--text) 20%, transparent);
-  }
-  .project-media:hover .project-img {
-    will-change: transform;
-  }
 }
 
 /* ==========================================================================
@@ -701,6 +737,14 @@ a:hover { color: var(--accent-hover); }
   object-position: top;
   background: var(--bg-muted);
 }
+@media (hover: hover) {
+  .gallery-open img {
+    transition: transform 0.4s ease;
+  }
+  .gallery-open:hover img {
+    transform: scale(1.04);
+  }
+}
 
 .gallery-caption {
   display: flex;
@@ -734,10 +778,6 @@ a:hover { color: var(--accent-hover); }
   line-height: 1.2;
   color: var(--text);
 }
-
-/* About paragraphs get --text instead of --text-soft.
-   The warm off-white background softens dark slate more than it looks
-   on paper, so the paragraph block uses the darkest token available. */
 .about-copy p {
   font-size: 16px;
   line-height: 1.7;
@@ -745,9 +785,6 @@ a:hover { color: var(--accent-hover); }
   margin-bottom: var(--space-sm);
   max-width: 52ch;
 }
-
-/* The eyebrow label above the section. Default --text-muted is too faint
-   against --bg-soft, so it steps up one tone. */
 #about .eyebrow {
   color: var(--text-soft);
 }
@@ -756,11 +793,6 @@ a:hover { color: var(--accent-hover); }
   display: grid;
   gap: var(--space-md);
 }
-
-/* Skill group titles ("Languages", "Frameworks and libraries", ...).
-   These were --text-muted, which reads almost invisible on light mode.
-   One step darker keeps them clearly subordinate to the tag pills below
-   while staying readable. */
 .skill-group h3 {
   font-family: var(--font-body);
   font-size: 11px;
@@ -780,7 +812,6 @@ a:hover { color: var(--accent-hover); }
   margin-bottom: var(--space-sm);
   max-width: 20ch;
 }
-
 .contact-sub {
   font-size: 16px;
   line-height: 1.55;
@@ -788,7 +819,6 @@ a:hover { color: var(--accent-hover); }
   margin-bottom: var(--space-lg);
   max-width: 52ch;
 }
-
 .contact-actions {
   display: flex;
   flex-wrap: wrap;
@@ -850,7 +880,6 @@ a:hover { color: var(--accent-hover); }
   flex-wrap: wrap;
   gap: var(--space-sm);
 }
-
 .footer-cta {
   display: inline-flex;
   align-items: center;
@@ -893,6 +922,13 @@ a:hover { color: var(--accent-hover); }
   object-fit: contain;
   border-radius: var(--radius-md);
   background: var(--bg-elev);
+}
+.lightbox[open] .lightbox-figure img {
+  animation: lightbox-zoom 0.25s ease-out;
+}
+@keyframes lightbox-zoom {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
 }
 .lightbox-figure figcaption {
   color: #ffffff;
@@ -964,10 +1000,6 @@ a:hover { color: var(--accent-hover); }
 
 /* ==========================================================================
    16b. SCROLL REVEALS
-   Elements marked .reveal start hidden and offset, then fade up into
-   place when they enter the viewport. The .is-visible class is added
-   by script.js using an IntersectionObserver. Reduced-motion users get
-   the final state immediately, no animation.
    ========================================================================== */
 .reveal {
   opacity: 0;
@@ -979,9 +1011,6 @@ a:hover { color: var(--accent-hover); }
   opacity: 1;
   transform: none;
 }
-
-/* Stagger: each child fades in slightly after the previous one.
-   Only applies to containers that opt in with .reveal-stagger. */
 .reveal-stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
 .reveal-stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
 .reveal-stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
@@ -989,119 +1018,12 @@ a:hover { color: var(--accent-hover); }
 .reveal-stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
 .reveal-stagger > .reveal:nth-child(6) { transition-delay: 400ms; }
 
-/* Reduced motion: skip the animation entirely and show the final state. */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     transform: none;
     transition: none;
   }
-}
-
-/* ==========================================================================
-   16c. MICRO-INTERACTIONS
-   Small, cheap effects that signal craft. Each one is wrapped in
-   @media (hover: hover) where it uses hover, so touch devices do not
-   get stuck states.
-   ========================================================================== */
-
-/* --- Header on scroll -------------------------------------------------
-   The header gains a soft shadow once the page has scrolled a few
-   pixels, so it clearly separates from the page content underneath.
-   The class is toggled by startHeaderScrollState() in script.js. */
-.site-header {
-  transition: box-shadow 0.25s ease, background 0.25s ease;
-}
-.site-header.is-scrolled {
-  background: color-mix(in srgb, var(--bg) 94%, transparent);
-  box-shadow: 0 1px 0 var(--line), 0 6px 20px -12px color-mix(in srgb, var(--text) 30%, transparent);
-}
-
-/* --- Nav links --------------------------------------------------------
-   A 2px underline grows from the center on hover. On touch devices,
-   the underline simply never appears. */
-.site-nav a {
-  position: relative;
-}
-@media (hover: hover) {
-  .site-nav a::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    right: 50%;
-    bottom: -4px;
-    height: 2px;
-    background: var(--accent);
-    transition: left 0.2s ease, right 0.2s ease;
-  }
-  .site-nav a:hover::after {
-    left: 0;
-    right: 0;
-  }
-}
-
-/* --- Status dot -------------------------------------------------------
-   A slow pulse on the availability dot. Two alternating opacities,
-   2.4 seconds per cycle. Signals "live" without being distracting. */
-.status-dot {
-  animation: status-pulse 2.4s ease-in-out infinite;
-}
-@keyframes status-pulse {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.5; }
-}
-
-/* --- Tag pills --------------------------------------------------------
-   On hover, a tag lifts slightly and gains a subtle border tint. Very
-   light touch, only on hover-capable devices. */
-@media (hover: hover) {
-  .tags li {
-    transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-  }
-  .tags li:hover {
-    transform: translateY(-1px);
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-}
-
-/* --- Icon buttons -----------------------------------------------------
-   Already have a border/background change. Add a slight scale on press
-   to match the button press feedback used elsewhere. */
-.icon-btn:active {
-  transform: scale(0.94);
-}
-
-/* --- Gallery slides ---------------------------------------------------
-   Already scale and lift on hover from section 11. Add a slight image
-   zoom inside the frame for depth. */
-@media (hover: hover) {
-  .gallery-open img {
-    transition: transform 0.4s ease;
-  }
-  .gallery-open:hover img {
-    transform: scale(1.04);
-  }
-}
-
-/* --- Lightbox opening -------------------------------------------------
-   When the dialog opens, the image fades and scales up gently. Uses
-   the ::backdrop fade the browser already provides for <dialog>, plus
-   a scale-in on the image itself. */
-.lightbox[open] .lightbox-figure img {
-  animation: lightbox-zoom 0.25s ease-out;
-}
-@keyframes lightbox-zoom {
-  from { opacity: 0; transform: scale(0.96); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-/* --- Reduced motion ---------------------------------------------------
-   Freeze everything decorative when the user asks for it. */
-@media (prefers-reduced-motion: reduce) {
-  .status-dot { animation: none; }
-  .lightbox[open] .lightbox-figure img { animation: none; }
-  .site-header { transition: none; }
 }
 
 /* ==========================================================================
@@ -1131,4 +1053,7 @@ a:hover { color: var(--accent-hover); }
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
   html { scroll-behavior: auto; }
+  .status-dot { animation: none; }
+  .lightbox[open] .lightbox-figure img { animation: none; }
+  .site-header { transition: none; }
 }
