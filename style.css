@@ -999,6 +999,112 @@ a:hover { color: var(--accent-hover); }
 }
 
 /* ==========================================================================
+   16c. MICRO-INTERACTIONS
+   Small, cheap effects that signal craft. Each one is wrapped in
+   @media (hover: hover) where it uses hover, so touch devices do not
+   get stuck states.
+   ========================================================================== */
+
+/* --- Header on scroll -------------------------------------------------
+   The header gains a soft shadow once the page has scrolled a few
+   pixels, so it clearly separates from the page content underneath.
+   The class is toggled by startHeaderScrollState() in script.js. */
+.site-header {
+  transition: box-shadow 0.25s ease, background 0.25s ease;
+}
+.site-header.is-scrolled {
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  box-shadow: 0 1px 0 var(--line), 0 6px 20px -12px color-mix(in srgb, var(--text) 30%, transparent);
+}
+
+/* --- Nav links --------------------------------------------------------
+   A 2px underline grows from the center on hover. On touch devices,
+   the underline simply never appears. */
+.site-nav a {
+  position: relative;
+}
+@media (hover: hover) {
+  .site-nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    bottom: -4px;
+    height: 2px;
+    background: var(--accent);
+    transition: left 0.2s ease, right 0.2s ease;
+  }
+  .site-nav a:hover::after {
+    left: 0;
+    right: 0;
+  }
+}
+
+/* --- Status dot -------------------------------------------------------
+   A slow pulse on the availability dot. Two alternating opacities,
+   2.4 seconds per cycle. Signals "live" without being distracting. */
+.status-dot {
+  animation: status-pulse 2.4s ease-in-out infinite;
+}
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+
+/* --- Tag pills --------------------------------------------------------
+   On hover, a tag lifts slightly and gains a subtle border tint. Very
+   light touch, only on hover-capable devices. */
+@media (hover: hover) {
+  .tags li {
+    transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+  .tags li:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+/* --- Icon buttons -----------------------------------------------------
+   Already have a border/background change. Add a slight scale on press
+   to match the button press feedback used elsewhere. */
+.icon-btn:active {
+  transform: scale(0.94);
+}
+
+/* --- Gallery slides ---------------------------------------------------
+   Already scale and lift on hover from section 11. Add a slight image
+   zoom inside the frame for depth. */
+@media (hover: hover) {
+  .gallery-open img {
+    transition: transform 0.4s ease;
+  }
+  .gallery-open:hover img {
+    transform: scale(1.04);
+  }
+}
+
+/* --- Lightbox opening -------------------------------------------------
+   When the dialog opens, the image fades and scales up gently. Uses
+   the ::backdrop fade the browser already provides for <dialog>, plus
+   a scale-in on the image itself. */
+.lightbox[open] .lightbox-figure img {
+  animation: lightbox-zoom 0.25s ease-out;
+}
+@keyframes lightbox-zoom {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* --- Reduced motion ---------------------------------------------------
+   Freeze everything decorative when the user asks for it. */
+@media (prefers-reduced-motion: reduce) {
+  .status-dot { animation: none; }
+  .lightbox[open] .lightbox-figure img { animation: none; }
+  .site-header { transition: none; }
+}
+
+/* ==========================================================================
    17. RESPONSIVE
    ========================================================================== */
 @media (max-width: 900px) {

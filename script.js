@@ -312,6 +312,32 @@
     });
   }
 
+    /* ---------- 7b. Header scroll state ---------- */
+  // Adds .is-scrolled to the header once the page has scrolled past a
+  // small threshold, so the sticky bar gains a shadow and stronger
+  // background. Uses rAF throttling because scroll fires many times
+  // per second.
+  function startHeaderScrollState() {
+    var header = document.querySelector(".site-header");
+    if (!header) return;
+
+    var ticking = false;
+    function update() {
+      var scrolled = window.scrollY > 8;
+      header.classList.toggle("is-scrolled", scrolled);
+      ticking = false;
+    }
+
+    window.addEventListener("scroll", function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }, { passive: true });
+
+    update();   // set the correct state on load
+  }
+
+
   /* ---------- 8. Hero orb words ---------- */
   // Each orb cycles through its own list of skills. The lists have
   // different lengths on purpose so the three orbs never sync up.
@@ -394,4 +420,5 @@
   runThemeEffect();   // run once on load, like useEffect with no dependencies
   startOrbCycler();
   startScrollReveals();
+  startHeaderScrollState();
 })();
