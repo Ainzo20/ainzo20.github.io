@@ -465,7 +465,7 @@ a:hover { color: var(--accent-hover); }
   white-space: nowrap;
   min-height: 44px;
 }
-.btn:active { transform: translateY(1px); }
+.btn:active { transform: translateY(1px) scale(0.98); }
 
 .btn-primary { background: var(--accent); color: var(--on-accent); }
 .btn-primary:hover { background: var(--accent-hover); color: var(--on-accent); }
@@ -536,7 +536,13 @@ a:hover { color: var(--accent-hover); }
 .project--reverse .project-media { order: 2; }
 .project--reverse .project-body  { order: 1; }
 
-.project-media { display: block; }
+/* The media container. overflow: hidden keeps the image from spilling
+   out of the rounded corners when it scales on hover. */
+.project-media {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
 
 .project-tag {
   font-size: 12px;
@@ -551,6 +557,7 @@ a:hover { color: var(--accent-hover); }
   font-size: clamp(22px, 2.6vw, 28px);
   font-weight: 700;
   margin-bottom: var(--space-sm);
+  transition: color 0.25s ease;
 }
 .project-body p {
   font-size: 15px;
@@ -559,7 +566,10 @@ a:hover { color: var(--accent-hover); }
 }
 .project-body .tags { margin-bottom: var(--space-md); }
 
+/* The link arrow. The ::after element is an underline that draws in
+   from left to right on hover, which pairs with the arrow sliding right. */
 .link-arrow {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -568,9 +578,38 @@ a:hover { color: var(--accent-hover); }
   color: var(--accent);
   min-height: 44px;
 }
+.link-arrow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 22px;              /* stop short of the arrow icon */
+  bottom: 12px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s ease;
+}
 .link-arrow:hover { color: var(--accent-hover); }
+.link-arrow:hover::after { transform: scaleX(1); }
 
-
+/* --- Hover state for the whole project row ---------------------------
+   Everything below is wrapped in @media (hover: hover) so touch
+   devices do not get stuck with a hover state after a tap.
+   The three motions (image scale, border color, shadow) all fire
+   together so the card responds as one object. */
+@media (hover: hover) {
+  .project-img {
+    transition: transform 0.4s ease, border-color 0.3s ease;
+  }
+  .project-media:hover .project-img {
+    transform: scale(1.03);
+    border-color: var(--accent);
+  }
+  .project:hover .project-body h3 {
+    color: var(--accent);
+  }
+}
 
 /* ==========================================================================
    10. IMAGES
@@ -583,6 +622,24 @@ a:hover { color: var(--accent-hover); }
   background: var(--bg-muted);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
+  /* will-change only on desktop hover devices: it promotes the image
+     to its own compositor layer for a smooth scale animation. */
+}
+
+/* Shadow appears under the whole media block on hover. Applied to the
+   wrapper, not the image, so it does not scale with the zoom. */
+@media (hover: hover) {
+  .project-media {
+    transition: box-shadow 0.35s ease;
+  }
+  .project-media:hover {
+    box-shadow:
+      0 20px 40px -20px color-mix(in srgb, var(--text) 30%, transparent),
+      0 8px 16px -12px color-mix(in srgb, var(--text) 20%, transparent);
+  }
+  .project-media:hover .project-img {
+    will-change: transform;
+  }
 }
 
 /* ==========================================================================
