@@ -99,23 +99,59 @@
     });
   }
 
-  /* ---------- 3. Theme ---------- */
+  /* ---------- 3. Theme (state + effect, vanilla) ---------- */
   var themeToggle = document.getElementById("theme-toggle");
 
-  function syncThemeButton() {
-    if (!themeToggle) return;
-    var isDark = root.getAttribute("data-theme") === "dark";
-    themeToggle.setAttribute("aria-pressed", String(isDark));
+  // STATE: the current theme lives on the <html> element as data-theme.
+  // It also persists to localStorage so it survives reloads.
+  function getTheme() {
+    return root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  }
+
+  // SETTER: change the state, persist it, then trigger the effect.
+  function setTheme(next) {
+    root.setAttribute("data-theme", next);
+    writeStorage(STORAGE_KEYS.theme, next);
+    runThemeEffect();
+  }
+
+  // EFFECT: runs every time the theme changes.
+  // Colors are NOT handled here. They live in CSS via --tokens, which is
+  // the correct place for them. This function only handles the things CSS
+  // cannot touch: accessibility state and mobile browser chrome.
+  function runThemeEffect() {
+    var isDark = getTheme() === "dark";
+
+    // 1. Screen reader state on the toggle button
+    if (themeToggle) {
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+    }
+
+    // 2. Mobile browser chrome: match --bg so the address bar does not clash
+    var styles = getComputedStyle(root);
+    var bg = styles.getPropertyValue("--bg").trim();
+    if (bg) {
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (!meta) {
+        meta = document.createElement("meta");
+        meta.setAttribute("name", "theme-color");
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute("content", bg);
+    }
   }
 
   if (themeToggle) {
     themeToggle.addEventListener("click", function () {
-      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
-      writeStorage(STORAGE_KEYS.theme, next);
-      syncThemeButton();
+      setTheme(getTheme() === "dark" ? "light" : "dark");
     });
   }
+
+  // Follow the OS theme live, unless the user already chose manually
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (event) {
+    if (readStorage(STORAGE_KEYS.theme)) return;
+    setTheme(event.matches ? "dark" : "light");
+  });
 
   /* ---------- 4. Toast ---------- */
   var toast = document.getElementById("toast");
@@ -262,5 +298,5 @@
 
   /* ---------- Init ---------- */
   applyLanguage(currentLang());
-  syncThemeButton();
+  runThemeEffect();   // run once on load, like useEffect with no dependencies
 })();

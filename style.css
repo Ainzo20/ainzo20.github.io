@@ -540,29 +540,7 @@ a:hover { color: var(--accent-hover); }
 }
 .link-arrow:hover { color: var(--accent-hover); }
 
-/* ==========================================================================
-   9b. WORK BANNER — full-width lead image above the project list
-   ========================================================================== */
-.work-banner {
-  margin: 0 0 clamp(32px, 4vw, 48px);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background: var(--bg-muted);
-}
 
-.work-banner img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 21 / 9;
-  object-fit: cover;
-  object-position: center;
-}
-
-@media (max-width: 700px) {
-  .work-banner img { aspect-ratio: 16 / 9; }
-}
 
 /* ==========================================================================
    10. IMAGES

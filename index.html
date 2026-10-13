@@ -4,9 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
-  <title>Vaitchafa Karl | Developer and Designer</title>
-  <meta name="description" content="Freelance web developer and graphic designer in Ngaoundéré, Cameroon. Clean code, readable interfaces, sane APIs.">
+  <title>Vaitchafa Karl | Full-Stack Developer and Designer</title>
+  <meta name="description" content="Freelance full-stack developer and graphic designer in Ngaoundéré, Cameroon. I build web apps and design for local businesses and remote teams.">
 
+  <!-- ============================================================
+       FAVICONS
+       Files live in fav-icon/ next to index.html.
+       Paths are relative (no leading slash) because the site is
+       published at ainzo20.github.io, not at a domain root.
+       The webmanifest is intentionally NOT linked: this is a
+       portfolio, not an installable PWA, and the generator's
+       manifest uses absolute paths that would 404 here.
+       ============================================================ -->
+  <link rel="icon" type="image/png" sizes="32x32" href="fav-icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="fav-icon/favicon-16x16.png">
+  <link rel="shortcut icon" href="fav-icon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="fav-icon/apple-touch-icon.png">
+
+  <!-- ============================================================
+       THEME + LANGUAGE BOOTSTRAP
+       Runs before first paint so the page never flashes the wrong
+       theme or the wrong language.
+       ============================================================ -->
   <script>
     (function () {
       var root = document.documentElement;
@@ -34,7 +53,7 @@
 
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#top"> Vaitchafa Karl</a>
+      <a class="brand" href="#top">Vaitchafa Karl</a>
 
       <nav id="site-nav" class="site-nav" aria-label="Main navigation" data-i18n-attr="aria-label:nav.label">
         <ul>
@@ -78,7 +97,7 @@
           </h1>
 
           <p class="lead" data-i18n="hero.lead">
-            Full-stack developer in Ngaoundéré, Cameroon, with a Master 2 in Computer Science. Three years of building and shipping web products, including remote work with international teams.
+            Full-stack developer based in Ngaoundéré, Cameroon, with a Master 2 in Computer Science. Since 2023, I've built and shipped web products, including remotely with international teams.
           </p>
 
           <div class="actions">
@@ -86,7 +105,11 @@
               <span data-i18n="hero.see">See my work</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
-            <a class="btn btn-ghost" href="Karl_Vaitchafa_eng.pdf" data-href-en="CV/Karl_Vaitchafa_eng.pdf" data-href-fr="CV/Karl_Vaitchafa_fr.pdf" download>
+            <!-- href points at the English CV by default. The i18n script
+                 rewrites it to data-href-fr when the language is French. -->
+            <a class="btn btn-ghost" href="CV/Karl_Vaitchafa_eng.pdf"
+               data-href-en="CV/Karl_Vaitchafa_eng.pdf"
+               data-href-fr="CV/Karl_Vaitchafa_fr.pdf" download>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg>
               <span data-i18n="hero.resume">Download my resume</span>
             </a>
@@ -124,9 +147,9 @@
 
       <div class="about-grid">
         <div class="about-copy">
-          <h2 class="about-headline" data-i18n="about.headline">Get to know me.</h2>
+          <h2 class="about-headline" data-i18n="about.headline">Developer by training, designer by practice.</h2>
 
-          <p data-i18n="about.p1">I hold a Master 2 in Computer Science from the University of Ngaoundéré. My thesis was on multi-objective optimization of workflow scheduling in Cloud and Fog environments.</p>
+          <p data-i18n="about.p1">I hold a Master 2 in Computer Science from the University of Ngaoundéré. My thesis focused on multi-objective optimization of workflow scheduling in Cloud and Fog environments, which means deciding where and when to run tasks across machines so they finish faster while balancing other costs.</p>
 
           <p data-i18n="about.p2">Since 2023 I've done five internships across web, mobile and backend, two of them remote with international teams. Along the way I've shipped three live products and designed for six freelance clients, mostly local businesses and associations.</p>
         </div>
@@ -165,10 +188,9 @@
       <div class="wrap">
         <header class="section-head">
           <p class="eyebrow"><span aria-hidden="true">02 ·</span> <span data-i18n="work.eyebrow">Work</span></p>
-          <h2 data-i18n="work.title">Recent work, live and shipped</h2>
-          <p class="section-sub" data-i18n="work.sub">A live web app, a redesigned radio front-end, and a QA pass on a Cameroonian marketplace.</p>
+          <h2 data-i18n="work.title">Selected projects</h2>
+          <p class="section-sub" data-i18n="work.sub">A live web app, a radio station front-end, a quality review of a Cameroonian marketplace, and this site.</p>
         </header>
-
 
         <article class="project">
           <div class="project-media">
@@ -179,7 +201,7 @@
           <div class="project-body">
             <p class="project-tag" data-i18n="work.atlas.role">Backend and data · Internship at CNDT</p>
             <h3>Digital Atlas of Cameroon</h3>
-            <p data-i18n="work.atlas.desc">An interactive atlas of Cameroon, built during my internship at CNDT. I wrote the FastAPI backend, modeled the document database in UML, designed the KoboCollect form for field data collection, and integrated OpenStreetMap and GeoJSON for the map layer. It is live and used by the team.</p>
+            <p data-i18n="work.atlas.desc">An interactive atlas of Cameroon, built during my internship at CNDT. I wrote the FastAPI backend, modeled the document database in UML, designed the KoboCollect form for field data collection, and integrated OpenStreetMap and GeoJSON for the map layer. It is live and in use by the team.</p>
             <ul class="tags" role="list"><li>FastAPI</li><li>MongoDB Atlas</li><li>GeoJSON</li><li>KoboCollect</li></ul>
             <a class="link-arrow" href="https://atlas-cameroun.onrender.com" target="_blank" rel="noopener">
               <span data-i18n="work.visit">Visit live site</span><span class="sr-only">: Digital Atlas of Cameroon</span>
@@ -217,7 +239,7 @@
           <div class="project-body">
             <p class="project-tag" data-i18n="work.barka.role">QA · Freelance</p>
             <h3>Barka.cm</h3>
-            <p data-i18n="work.barka.desc">I reviewed the Cameroonian marketplace against its specification document (cahier des charges), wrote structured bug reports with reproduction steps and severity levels, and gave feedback that guided the fix cycle. Delivered remotely.</p>
+            <p data-i18n="work.barka.desc">I reviewed the Cameroonian marketplace against its specification document (cahier des charges), wrote structured bug reports with reproduction steps and severity levels, and provided feedback used during the fix cycle. Delivered remotely.</p>
             <ul class="tags" role="list"><li>QA</li><li data-i18n="work.tag.bugs">Bug reports</li><li data-i18n="work.tag.specs">Specs review</li></ul>
             <a class="link-arrow" href="https://barka.cm" target="_blank" rel="noopener">
               <span data-i18n="work.visit">Visit live site</span><span class="sr-only">: Barka.cm</span>
@@ -227,7 +249,8 @@
           </div>
         </article>
 
-                <!-- Portfolio website — the site you're on now -->
+        <!-- Portfolio website: the site you are on now. Same card shape as
+             the others so it reads as one more project, not a special case. -->
         <article class="project project--reverse">
           <div class="project-media">
             <img class="project-img" src="images/portfolio.png"
@@ -237,7 +260,7 @@
           <div class="project-body">
             <p class="project-tag" data-i18n="work.portfolio.role">Personal · Design and development</p>
             <h3>Portfolio website</h3>
-            <p data-i18n="work.portfolio.desc">My portfolio, designed and implemented to showcase my work.</p>
+            <p data-i18n="work.portfolio.desc">The site you're on. Designed and built from scratch in plain HTML, CSS and JavaScript, with a light/dark theme, an English/French switch and a keyboard-accessible gallery.</p>
             <ul class="tags" role="list"><li>HTML5</li><li>CSS3</li><li>JavaScript</li><li data-i18n="work.tag.a11y">Accessibility</li></ul>
             <a class="link-arrow" href="https://github.com/Ainzo20" target="_blank" rel="noopener">
               <span data-i18n="work.visit.source">View source</span><span class="sr-only">: Portfolio website</span>
@@ -266,71 +289,71 @@
         </div>
 
         <ul class="gallery-track" id="gallery-track" role="list">
-        <li class="gallery-slide" data-full="images/lac-fertilizer.png" data-caption-key="design.lac.cap">
-          <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d1-open d1-title">
-            <img src="images/lac-fertilizer.png" alt="" loading="lazy" decoding="async">
-            <span class="sr-only" id="d1-open" data-i18n="gallery.enlarge">Enlarge image</span>
-          </button>
-          <p class="gallery-caption">
-            <strong id="d1-title">Lac Fertilizer</strong>
-            <span data-i18n="design.lac.desc">NPK bag packaging</span>
-          </p>
-        </li>
+          <li class="gallery-slide" data-full="images/lac-fertilizer.png" data-caption-key="design.lac.cap">
+            <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d1-open d1-title">
+              <img src="images/lac-fertilizer.png" alt="" loading="lazy" decoding="async">
+              <span class="sr-only" id="d1-open" data-i18n="gallery.enlarge">Enlarge image</span>
+            </button>
+            <p class="gallery-caption">
+              <strong id="d1-title">Lac Fertilizer</strong>
+              <span data-i18n="design.lac.desc">NPK bag packaging</span>
+            </p>
+          </li>
 
-        <li class="gallery-slide" data-full="images/scos-cakes.png" data-caption-key="design.scos.cap">
-          <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d2-open d2-title">
-            <img src="images/scos-cakes.png" alt="" loading="lazy" decoding="async">
-            <span class="sr-only" id="d2-open" data-i18n="gallery.enlarge">Enlarge image</span>
-          </button>
-          <p class="gallery-caption">
-            <strong id="d2-title">Sco's Cakes and Bites</strong>
-            <span data-i18n="design.scos.desc">Bakery menu flyer</span>
-          </p>
-        </li>
+          <li class="gallery-slide" data-full="images/scos-cakes.png" data-caption-key="design.scos.cap">
+            <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d2-open d2-title">
+              <img src="images/scos-cakes.png" alt="" loading="lazy" decoding="async">
+              <span class="sr-only" id="d2-open" data-i18n="gallery.enlarge">Enlarge image</span>
+            </button>
+            <p class="gallery-caption">
+              <strong id="d2-title">Sco's Cakes and Bites</strong>
+              <span data-i18n="design.scos.desc">Bakery menu flyer</span>
+            </p>
+          </li>
 
-        <li class="gallery-slide" data-full="images/cordial-sisters.png" data-caption-key="design.cordial.cap">
-          <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d3-open d3-title">
-            <img src="images/cordial-sisters.png" alt="" loading="lazy" decoding="async">
-            <span class="sr-only" id="d3-open" data-i18n="gallery.enlarge">Enlarge image</span>
-          </button>
-          <p class="gallery-caption">
-            <strong id="d3-title">Cordial Sisters</strong>
-            <span data-i18n="design.cordial.desc">Illustrated membership card</span>
-          </p>
-        </li>
+          <li class="gallery-slide" data-full="images/cordial-sisters.png" data-caption-key="design.cordial.cap">
+            <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d3-open d3-title">
+              <img src="images/cordial-sisters.png" alt="" loading="lazy" decoding="async">
+              <span class="sr-only" id="d3-open" data-i18n="gallery.enlarge">Enlarge image</span>
+            </button>
+            <p class="gallery-caption">
+              <strong id="d3-title">Cordial Sisters</strong>
+              <span data-i18n="design.cordial.desc">Illustrated membership card</span>
+            </p>
+          </li>
 
-        <li class="gallery-slide" data-full="images/macuda-womens-wing.png" data-caption-key="design.macuda.cap">
-          <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d4-open d4-title">
-            <img src="images/macuda-womens-wing.png" alt="" loading="lazy" decoding="async">
-            <span class="sr-only" id="d4-open" data-i18n="gallery.enlarge">Enlarge image</span>
-          </button>
-          <p class="gallery-caption">
-            <strong id="d4-title">Macuda Women's Wing</strong>
-            <span data-i18n="design.macuda.desc">Membership card</span>
-          </p>
-        </li>
+          <li class="gallery-slide" data-full="images/macuda-womens-wing.png" data-caption-key="design.macuda.cap">
+            <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d4-open d4-title">
+              <img src="images/macuda-womens-wing.png" alt="" loading="lazy" decoding="async">
+              <span class="sr-only" id="d4-open" data-i18n="gallery.enlarge">Enlarge image</span>
+            </button>
+            <p class="gallery-caption">
+              <strong id="d4-title">Macuda Women's Wing</strong>
+              <span data-i18n="design.macuda.desc">Membership card</span>
+            </p>
+          </li>
 
-        <li class="gallery-slide" data-full="images/dimanche-taro.png" data-caption-key="design.dimanche.cap">
-          <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d5-open d5-title">
-            <img src="images/dimanche-taro.png" alt="" loading="lazy" decoding="async">
-            <span class="sr-only" id="d5-open" data-i18n="gallery.enlarge">Enlarge image</span>
-          </button>
-          <p class="gallery-caption">
-            <strong id="d5-title">Dimanche Taro chez Odette</strong>
-            <span data-i18n="design.dimanche.desc">Restaurant menu flyer</span>
-          </p>
-        </li>
+          <li class="gallery-slide" data-full="images/dimanche-taro.png" data-caption-key="design.dimanche.cap">
+            <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d5-open d5-title">
+              <img src="images/dimanche-taro.png" alt="" loading="lazy" decoding="async">
+              <span class="sr-only" id="d5-open" data-i18n="gallery.enlarge">Enlarge image</span>
+            </button>
+            <p class="gallery-caption">
+              <strong id="d5-title">Dimanche Taro chez Odette</strong>
+              <span data-i18n="design.dimanche.desc">Restaurant menu flyer</span>
+            </p>
+          </li>
 
-        <li class="gallery-slide" data-full="images/pure-honey.png" data-caption-key="design.honey.cap">
-          <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d6-open d6-title">
-            <img src="images/pure-honey.png" alt="" loading="lazy" decoding="async">
-            <span class="sr-only" id="d6-open" data-i18n="gallery.enlarge">Enlarge image</span>
-          </button>
-          <p class="gallery-caption">
-            <strong id="d6-title">Pure Honey</strong>
-            <span data-i18n="design.honey.desc">Product flyer</span>
-          </p>
-        </li>
+          <li class="gallery-slide" data-full="images/pure-honey.png" data-caption-key="design.honey.cap">
+            <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d6-open d6-title">
+              <img src="images/pure-honey.png" alt="" loading="lazy" decoding="async">
+              <span class="sr-only" id="d6-open" data-i18n="gallery.enlarge">Enlarge image</span>
+            </button>
+            <p class="gallery-caption">
+              <strong id="d6-title">Pure Honey</strong>
+              <span data-i18n="design.honey.desc">Product flyer</span>
+            </p>
+          </li>
         </ul>
       </div>
     </section>
@@ -341,7 +364,7 @@
         <p class="eyebrow"><span aria-hidden="true">04 ·</span> <span data-i18n="contact.eyebrow">Contact</span></p>
 
         <h2 class="contact-headline" data-i18n="contact.headline">Tell me what you're trying to build.</h2>
-        <p class="contact-sub" data-i18n="contact.sub">I read every message and reply within a day, usually faster on WhatsApp.</p>
+        <p class="contact-sub" data-i18n="contact.sub">I usually reply within a day, often faster on WhatsApp.</p>
 
         <div class="contact-actions">
           <a class="btn btn-primary" href="https://wa.me/237675857264" target="_blank" rel="noopener">
