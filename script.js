@@ -1,6 +1,7 @@
 /* ==========================================================================
    Portfolio script
-   Language switch, theme toggle, copy email, design gallery + lightbox, toast.
+   Language switch, theme toggle, copy email, design gallery + lightbox, toast,
+   hero orb word cycler.
    Requires i18n.js (window.I18N) to be loaded first.
    ========================================================================== */
 (function () {
@@ -12,6 +13,21 @@
   var EMAIL = "karlvait21@gmail.com";
   var TOAST_DURATION_MS = 2000;
   var SWIPE_THRESHOLD_PX = 50;
+
+  // Hero orb word cycler settings
+  var ORB_WORDS = [
+    // Orb 0 (large, top-left): the developer side
+    ["Web apps", "APIs", "Backends", "Interfaces", "Full-stack"],
+
+    // Orb 1 (middle): the range of deliverables
+    ["Websites", "Mobile apps", "Dashboards", "Designs", "Products"],
+
+    // Orb 2 (small, top-right): the craft
+    ["Clean code", "UI design", "Data", "Testing", "Identity"]
+  ];
+  var MIN_CYCLE_MS = 3200;
+  var MAX_CYCLE_MS = 5200;
+  var WORD_FADE_MS = 500;
 
   var root = document.documentElement;
 
@@ -296,7 +312,53 @@
     });
   }
 
+  /* ---------- 8. Hero orb words ---------- */
+  // Each orb cycles through its own list of skills. The lists have
+  // different lengths on purpose so the three orbs never sync up.
+  // Timing is randomized per cycle so the motion never feels mechanical.
+  function cycleOrbWord(el, words, index) {
+    el.classList.add("is-changing");
+    window.setTimeout(function () {
+      el.textContent = words[index % words.length];
+      el.classList.remove("is-changing");
+    }, WORD_FADE_MS);
+  }
+
+  function startOrbCycler() {
+    var orbWords = all(".orb-word");
+    if (!orbWords.length) return;
+
+    // Reduced motion: show one word per orb and never cycle.
+    if (prefersReducedMotion()) {
+      orbWords.forEach(function (el) {
+        var idx = parseInt(el.getAttribute("data-orb"), 10) || 0;
+        el.textContent = ORB_WORDS[idx] ? ORB_WORDS[idx][0] : "";
+      });
+      return;
+    }
+
+    orbWords.forEach(function (el) {
+      var idx = parseInt(el.getAttribute("data-orb"), 10) || 0;
+      var words = ORB_WORDS[idx] || [];
+      if (!words.length) return;
+
+      var wordIndex = 0;
+      el.textContent = words[wordIndex];   // show the first word immediately
+
+      function scheduleNext() {
+        var delay = MIN_CYCLE_MS + Math.random() * (MAX_CYCLE_MS - MIN_CYCLE_MS);
+        window.setTimeout(function () {
+          wordIndex += 1;
+          cycleOrbWord(el, words, wordIndex);
+          scheduleNext();
+        }, delay);
+      }
+      scheduleNext();
+    });
+  }
+
   /* ---------- Init ---------- */
   applyLanguage(currentLang());
   runThemeEffect();   // run once on load, like useEffect with no dependencies
+  startOrbCycler();
 })();

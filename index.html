@@ -116,18 +116,24 @@
           </div>
         </div>
 
+                <!-- Hero art: three drifting orbs. Each one carries a short skill
+             word that cycles on its own random interval so the three never
+             sync up. Words come from ORB_WORDS in script.js. The whole
+             block is aria-hidden because the h1 already carries the message. -->
         <div class="hero-art" aria-hidden="true">
           <div class="orb orb-1">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="m8 6-6 6 6 6"/>
               <path d="m16 6 6 6-6 6"/>
             </svg>
+            <span class="orb-word" data-orb="0"></span>
           </div>
           <div class="orb orb-2">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="5" width="18" height="12" rx="2"/>
               <path d="M2 20h20"/>
             </svg>
+            <span class="orb-word" data-orb="1"></span>
           </div>
           <div class="orb orb-3">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -135,10 +141,9 @@
               <path d="M7 8.5 12.5 14"/>
               <path d="M7 8.5c-1.5 0-3 1-3.5 3-.5 2-.5 3.5-1.5 4.5-1 1-2 1.5-2 1.5s2 .5 3.5.5c1.5 0 3-1 3.5-2 .5-1 1-2.5 1.5-3.5.5-1 1.5-2 1.5-3.5l-3-1z"/>
             </svg>
+            <span class="orb-word" data-orb="2"></span>
           </div>
         </div>
-
-      </div>
     </section>
 
     <!-- ABOUT -->

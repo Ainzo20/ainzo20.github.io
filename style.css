@@ -328,7 +328,7 @@ a:hover { color: var(--accent-hover); }
 }
 
 /* ------------------------------------------------------------------
-   HERO ART — decorative drifting circles with icons
+   HERO ART — three drifting orbs, each carrying a cycling skill word
    ------------------------------------------------------------------ */
 .hero-art {
   position: relative;
@@ -341,8 +341,10 @@ a:hover { color: var(--accent-hover); }
 .orb {
   position: absolute;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   border-radius: 50%;
   color: var(--accent);
   background: color-mix(in srgb, var(--accent) 8%, transparent);
@@ -380,12 +382,39 @@ a:hover { color: var(--accent-hover); }
   animation: drift-3 22s ease-in-out infinite;
 }
 
+/* Icon inside each orb. Sized as a fraction of the orb so it stays
+   proportional as the circle drifts and as the viewport changes. */
 .orb svg {
-  width: 32%;
-  height: 32%;
-  max-width: 56px;
-  max-height: 56px;
+  width: 30%;
+  height: 30%;
+  max-width: 48px;
+  max-height: 48px;
   stroke-width: 1.75;
+  opacity: 0.85;
+}
+
+/* The cycling word below the icon. min-height reserves the line so the
+   orb does not jump when the word length changes. */
+.orb-word {
+  display: block;
+  min-height: 1em;
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1vw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+  padding: 0 6px;
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* While the word is swapping, fade out and lift slightly. The script
+   toggles this class, waits, changes the text, then removes the class. */
+.orb-word.is-changing {
+  opacity: 0;
+  transform: translateY(-4px);
 }
 
 @keyframes drift-1 {
@@ -414,6 +443,7 @@ a:hover { color: var(--accent-hover); }
 
 @media (prefers-reduced-motion: reduce) {
   .orb { animation: none; }
+  .orb-word { transition: none; }
 }
 
 /* ==========================================================================
