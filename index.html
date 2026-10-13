@@ -82,7 +82,9 @@
 
   <main id="main">
 
-    <!-- HERO -->
+    <!-- HERO
+         No .reveal here. The hero should be visible immediately on load.
+         The orbs provide motion without a fade-in. -->
     <section class="hero wrap" id="top">
       <div class="hero-grid">
 
@@ -116,7 +118,7 @@
           </div>
         </div>
 
-                <!-- Hero art: three drifting orbs. Each one carries a short skill
+        <!-- Hero art: three drifting orbs. Each one carries a short skill
              word that cycles on its own random interval so the three never
              sync up. Words come from ORB_WORDS in script.js. The whole
              block is aria-hidden because the h1 already carries the message. -->
@@ -144,14 +146,16 @@
             <span class="orb-word" data-orb="2"></span>
           </div>
         </div>
+
+      </div>
     </section>
 
     <!-- ABOUT -->
     <section class="section wrap" id="about">
       <p class="eyebrow"><span aria-hidden="true">01 ·</span> <span data-i18n="about.eyebrow">About</span></p>
 
-      <div class="about-grid">
-        <div class="about-copy">
+      <div class="about-grid reveal-stagger">
+        <div class="about-copy reveal">
           <h2 class="about-headline" data-i18n="about.headline">Developer by training, designer by practice.</h2>
 
           <p data-i18n="about.p1">I hold a Master 2 in Computer Science from the University of Ngaoundéré. My thesis focused on multi-objective optimization of workflow scheduling in Cloud and Fog environments, which means deciding where and when to run tasks across machines so they finish faster while balancing other costs.</p>
@@ -159,7 +163,7 @@
           <p data-i18n="about.p2">Since 2023 I've done five internships across web, mobile and backend, two of them remote with international teams. Along the way I've shipped three live products and designed for six freelance clients, mostly local businesses and associations.</p>
         </div>
 
-        <aside class="skills" aria-label="Skills" data-i18n-attr="aria-label:skills.label">
+        <aside class="skills reveal" aria-label="Skills" data-i18n-attr="aria-label:skills.label">
           <div class="skill-group">
             <h3 data-i18n="skills.languages">Languages</h3>
             <ul class="tags" role="list"><li>Dart</li><li>JavaScript</li><li>TypeScript</li><li>Python</li><li>HTML5</li><li>CSS3</li></ul>
@@ -191,13 +195,13 @@
     <!-- WORK -->
     <section class="section section--alt" id="work">
       <div class="wrap">
-        <header class="section-head">
+        <header class="section-head reveal">
           <p class="eyebrow"><span aria-hidden="true">02 ·</span> <span data-i18n="work.eyebrow">Work</span></p>
           <h2 data-i18n="work.title">Selected projects</h2>
           <p class="section-sub" data-i18n="work.sub">A live web app, a radio station front-end, a quality review of a Cameroonian marketplace, and this site.</p>
         </header>
 
-        <article class="project">
+        <article class="project reveal">
           <div class="project-media">
             <img class="project-img" src="images/atlas-cameroon.png"
                  alt="Screenshot of the Digital Atlas of Cameroon interactive map"
@@ -216,7 +220,7 @@
           </div>
         </article>
 
-        <article class="project project--reverse">
+        <article class="project project--reverse reveal">
           <div class="project-media">
             <img class="project-img" src="images/radio-azul.png"
                  alt="Screenshot of the Radio Azul International website"
@@ -235,7 +239,7 @@
           </div>
         </article>
 
-        <article class="project">
+        <article class="project reveal">
           <div class="project-media">
             <img class="project-img" src="images/barka-cm.png"
                  alt="Screenshot of the Barka.cm marketplace"
@@ -256,7 +260,7 @@
 
         <!-- Portfolio website: the site you are on now. Same card shape as
              the others so it reads as one more project, not a special case. -->
-        <article class="project project--reverse">
+        <article class="project project--reverse reveal">
           <div class="project-media">
             <img class="project-img" src="images/portfolio.png"
                  alt="Overview of Karl Vaitchafa's design and development work"
@@ -279,7 +283,7 @@
 
     <!-- DESIGN -->
     <section class="section wrap" id="design">
-      <header class="section-head">
+      <header class="section-head reveal">
         <p class="eyebrow"><span aria-hidden="true">03 ·</span> <span data-i18n="design.eyebrow">Design</span></p>
         <h2 data-i18n="design.title">Six freelance design clients</h2>
         <p class="section-sub" data-i18n="design.sub">Membership cards, product flyers and packaging for local businesses and associations.</p>
@@ -293,8 +297,8 @@
                   aria-label="Next projects" data-i18n-attr="aria-label:gallery.next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
         </div>
 
-        <ul class="gallery-track" id="gallery-track" role="list">
-          <li class="gallery-slide" data-full="images/lac-fertilizer.png" data-caption-key="design.lac.cap">
+        <ul class="gallery-track reveal-stagger" id="gallery-track" role="list">
+          <li class="gallery-slide reveal" data-full="images/lac-fertilizer.png" data-caption-key="design.lac.cap">
             <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d1-open d1-title">
               <img src="images/lac-fertilizer.png" alt="" loading="lazy" decoding="async">
               <span class="sr-only" id="d1-open" data-i18n="gallery.enlarge">Enlarge image</span>
@@ -305,7 +309,7 @@
             </p>
           </li>
 
-          <li class="gallery-slide" data-full="images/scos-cakes.png" data-caption-key="design.scos.cap">
+          <li class="gallery-slide reveal" data-full="images/scos-cakes.png" data-caption-key="design.scos.cap">
             <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d2-open d2-title">
               <img src="images/scos-cakes.png" alt="" loading="lazy" decoding="async">
               <span class="sr-only" id="d2-open" data-i18n="gallery.enlarge">Enlarge image</span>
@@ -316,7 +320,7 @@
             </p>
           </li>
 
-          <li class="gallery-slide" data-full="images/cordial-sisters.png" data-caption-key="design.cordial.cap">
+          <li class="gallery-slide reveal" data-full="images/cordial-sisters.png" data-caption-key="design.cordial.cap">
             <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d3-open d3-title">
               <img src="images/cordial-sisters.png" alt="" loading="lazy" decoding="async">
               <span class="sr-only" id="d3-open" data-i18n="gallery.enlarge">Enlarge image</span>
@@ -327,7 +331,7 @@
             </p>
           </li>
 
-          <li class="gallery-slide" data-full="images/macuda-womens-wing.png" data-caption-key="design.macuda.cap">
+          <li class="gallery-slide reveal" data-full="images/macuda-womens-wing.png" data-caption-key="design.macuda.cap">
             <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d4-open d4-title">
               <img src="images/macuda-womens-wing.png" alt="" loading="lazy" decoding="async">
               <span class="sr-only" id="d4-open" data-i18n="gallery.enlarge">Enlarge image</span>
@@ -338,7 +342,7 @@
             </p>
           </li>
 
-          <li class="gallery-slide" data-full="images/dimanche-taro.png" data-caption-key="design.dimanche.cap">
+          <li class="gallery-slide reveal" data-full="images/dimanche-taro.png" data-caption-key="design.dimanche.cap">
             <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d5-open d5-title">
               <img src="images/dimanche-taro.png" alt="" loading="lazy" decoding="async">
               <span class="sr-only" id="d5-open" data-i18n="gallery.enlarge">Enlarge image</span>
@@ -349,7 +353,7 @@
             </p>
           </li>
 
-          <li class="gallery-slide" data-full="images/pure-honey.png" data-caption-key="design.honey.cap">
+          <li class="gallery-slide reveal" data-full="images/pure-honey.png" data-caption-key="design.honey.cap">
             <button type="button" class="gallery-open" aria-haspopup="dialog" aria-labelledby="d6-open d6-title">
               <img src="images/pure-honey.png" alt="" loading="lazy" decoding="async">
               <span class="sr-only" id="d6-open" data-i18n="gallery.enlarge">Enlarge image</span>
@@ -368,10 +372,10 @@
       <div class="wrap">
         <p class="eyebrow"><span aria-hidden="true">04 ·</span> <span data-i18n="contact.eyebrow">Contact</span></p>
 
-        <h2 class="contact-headline" data-i18n="contact.headline">Tell me what you're trying to build.</h2>
-        <p class="contact-sub" data-i18n="contact.sub">I usually reply within a day, often faster on WhatsApp.</p>
+        <h2 class="contact-headline reveal" data-i18n="contact.headline">Tell me what you're trying to build.</h2>
+        <p class="contact-sub reveal" data-i18n="contact.sub">I usually reply within a day, often faster on WhatsApp.</p>
 
-        <div class="contact-actions">
+        <div class="contact-actions reveal">
           <a class="btn btn-primary" href="https://wa.me/237675857264" target="_blank" rel="noopener">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.3A7.9 7.9 0 0 0 4 12a7.9 7.9 0 0 0 1.2 4.2L4 20l3.9-1.2A7.9 7.9 0 0 0 12 20a7.9 7.9 0 0 0 5.6-13.7ZM12 18.5a6.5 6.5 0 0 1-3.4-.9l-.2-.1-2.3.7.7-2.2-.2-.3A6.5 6.5 0 1 1 12 18.5Zm3.6-4.9c-.2-.1-1.2-.6-1.3-.7-.2-.1-.3-.1-.4.1-.1.2-.5.7-.6.8-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.5-.9-.5-.5-.9-1.1-1-1.3-.1-.2 0-.3.1-.4l.3-.4c.1-.1.1-.2.2-.3 0-.1 0-.2 0-.3-.1-.1-.4-1-.6-1.4-.1-.3-.3-.3-.4-.3h-.4c-.1 0-.3.1-.5.2-.2.2-.6.6-.6 1.4 0 .8.6 1.6.7 1.7.1.1 1.2 1.9 3 2.6.4.2.7.3 1 .4.4.1.8.1 1.1.1.3 0 1.2-.5 1.3-1 .2-.5.2-.9.1-1 0-.1-.2-.1-.4-.2Z"/></svg>
             WhatsApp<span class="sr-only" data-i18n="common.newtab">(opens in a new tab)</span>
@@ -386,7 +390,7 @@
           </button>
         </div>
 
-        <div class="resume-row">
+        <div class="resume-row reveal">
           <a class="resume-link" href="CV/Karl_Vaitchafa_eng.pdf" download lang="en">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg>
             Resume · English
@@ -397,7 +401,7 @@
           </a>
         </div>
 
-        <ul class="link-row">
+        <ul class="link-row reveal">
           <li>
             <a href="https://www.linkedin.com/in/karl-vaitchafa" target="_blank" rel="noopener">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm6 0h3.8v1.7h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9V9Z"/></svg>

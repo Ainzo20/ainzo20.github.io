@@ -897,6 +897,42 @@ a:hover { color: var(--accent-hover); }
 .toast.is-visible { transform: translateX(-50%) translateY(0); opacity: 1; }
 
 /* ==========================================================================
+   16b. SCROLL REVEALS
+   Elements marked .reveal start hidden and offset, then fade up into
+   place when they enter the viewport. The .is-visible class is added
+   by script.js using an IntersectionObserver. Reduced-motion users get
+   the final state immediately, no animation.
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger: each child fades in slightly after the previous one.
+   Only applies to containers that opt in with .reveal-stagger. */
+.reveal-stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger > .reveal:nth-child(6) { transition-delay: 400ms; }
+
+/* Reduced motion: skip the animation entirely and show the final state. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ==========================================================================
    17. RESPONSIVE
    ========================================================================== */
 @media (max-width: 900px) {

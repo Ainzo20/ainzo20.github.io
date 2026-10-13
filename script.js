@@ -357,8 +357,41 @@
     });
   }
 
+    /* ---------- 9. Scroll reveals ---------- */
+  // Elements with .reveal fade up when they enter the viewport.
+  // Uses IntersectionObserver so there is no scroll listener and
+  // no layout thrashing. Each element reveals once, then stops being
+  // observed. Reduced-motion users see everything immediately.
+  function startScrollReveals() {
+    var elements = all(".reveal");
+    if (!elements.length) return;
+
+    // No IntersectionObserver (very old browsers): just show everything.
+    if (!("IntersectionObserver" in window) || prefersReducedMotion()) {
+      elements.forEach(function (el) { el.classList.add("is-visible"); });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);   // reveal once, then stop watching
+        }
+      });
+    }, {
+      // Trigger when ~15% of the element is visible, with a small
+      // bottom margin so items reveal slightly before hitting the edge.
+      threshold: 0.15,
+      rootMargin: "0px 0px -40px 0px"
+    });
+
+    elements.forEach(function (el) { observer.observe(el); });
+  }
+
   /* ---------- Init ---------- */
   applyLanguage(currentLang());
   runThemeEffect();   // run once on load, like useEffect with no dependencies
   startOrbCycler();
+  startScrollReveals();
 })();
